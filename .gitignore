@@ -131,4 +131,5 @@ dmypy.json
 # projeto
 media/
 .vscode/
-.idea/
+.idea
+db_sqlite3
