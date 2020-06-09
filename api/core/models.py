@@ -4,13 +4,13 @@ from django.db import models
 
 
 class Point(models.Model):
-    image = models.ImageField('imagem', upload_to='images/', null=True)
-    name = models.CharField('nome', max_length=100, null=True)
-    lat = models.DecimalField('latitude', max_digits=11, decimal_places=7,null=True)
-    long = models.DecimalField('longitude', max_digits=11, decimal_places=7, null=True)
-    number = models.CharField('numero', max_length=20, null=True)
-    city = models.CharField('cidade',max_length=100, null=True)
-    uf = models.CharField('estado', max_length=2, null=True)
+    image = models.ImageField('imagem', upload_to='images/', default='')
+    name = models.CharField('nome', max_length=100, default='')
+    lat = models.DecimalField('latitude', max_digits=11, decimal_places=7, default=0.0)
+    long = models.DecimalField('longitude', max_digits=11, decimal_places=7, default=0.0)
+    number = models.CharField('numero', max_length=20, default='')
+    city = models.CharField('cidade',max_length=100, default='')
+    uf = models.CharField('estado', max_length=2, default='')
 
     class Meta:
         verbose_name = 'ponto de coleta'

@@ -1,4 +1,6 @@
 import json
+
+from model_mommy import mommy
 from rest_framework import status
 from django.test import TestCase, Client
 from django.urls import reverse
@@ -55,11 +57,10 @@ class GetSingleItemTest(TestCase):
 
 class CreateNewItemTest(TestCase):
     def setUp(self):
+        self.item = mommy.make(Item, _fill_optional=True, point__name='escola 1')
+        self.item.save()
 
-        self.valid_payload = {
-            'title': 'Lampada_+test_2',
-            'points': [1]
-        }
+        self.valid_payload = self.item.__dict__
         self.invalid_payload = {
             'title': ''
         }
@@ -68,7 +69,7 @@ class CreateNewItemTest(TestCase):
 
         response = client.post(
             reverse('item-list'),
-            data=json.dumps(self.valid_payload),
+            data=self.valid_payload,
             content_type='application/json'
         )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
